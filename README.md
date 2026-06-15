@@ -10,7 +10,7 @@
 
 Analyzing the relationship between Environmental, Social, and Governance (ESG) factors and financial performance across 1,000 global companies from 2015-2025.
 
-[Live Dashboard]([#](https://esgfin-relation.streamlit.app/)) | [Dataset](https://www.kaggle.com/datasets/shriyashjagtap/esg-and-financial-performance-dataset)
+[Dataset](https://www.kaggle.com/datasets/shriyashjagtap/esg-and-financial-performance-dataset)
 
 </div>
 
@@ -63,24 +63,22 @@ This project explores the critical relationship between sustainability practices
 - **Objective**: Predict ESG performance category (Excellent, Good, Average, Poor)
 - **Features**: Carbon Emissions, Water Usage, Energy Consumption
 - **Models Tested**: Logistic Regression, Random Forest, Gradient Boosting, SVM, KNN
-- **Best Model Accuracy**: 85%+ (varies by implementation)
+- **Best Model**: Random Forest (with GridSearchCV tuning)
 
 #### Regression Analysis
 - **Objective**: Predict profit margin based on ESG and environmental metrics
 - **Features**: ESG Overall Score, Carbon Emissions, Water Usage, Energy Consumption
-- **Models Compared**: 
+- **Models Compared**:
   - Linear Regression (Simple, Polynomial)
   - Regularized Models (Ridge, Lasso, ElasticNet)
   - Ensemble Methods (Random Forest, Gradient Boosting, XGBoost)
-- **Best Model R² Score**: 0.75+ (varies by implementation)
+- **Best Model**: Random Forest Regressor
 
 ### 📊 Time Series Forecasting
 - **Metrics Forecasted**: Growth Rate, Revenue, ESG Overall Score
 - **Forecast Horizon**: 5 years (2026-2030)
-- **Methods**: 
-  - **SARIMA**: Statistical approach for seasonal patterns
-  - **Prophet**: Facebook's robust forecasting tool
-- **Model Comparison**: MAPE and RMSE evaluation
+- **Method**: SARIMA (statsmodels)
+- **Evaluation**: MAPE and RMSE
 
 ### 🎨 Interactive Dashboard
 - Real-time data filtering by year, industry, and region
@@ -107,58 +105,45 @@ This project explores the critical relationship between sustainability practices
 | **Environmental** | CarbonEmissions, WaterUsage, EnergyConsumption |
 
 ### Industries Covered
-- Technology
-- Finance
-- Energy
-- Healthcare
-- Manufacturing
-- Retail
-- Transportation
-- Telecommunications
-- Consumer Goods
+- Technology, Finance, Energy, Healthcare, Manufacturing
+- Retail, Transportation, Telecommunications, Consumer Goods
 
 ### Geographic Regions
-- North America
-- Europe
-- Asia
-- South America
-- Africa
-- Oceania
-- Middle East
+- North America, Europe, Asia, South America, Africa, Oceania, Middle East
 
 ---
 
 ## 📁 Project Structure
 
 ```
-esg-financial-analysis/
+ESG_and_Financial_Relationship/
+│
+├── 01_EDA.ipynb                         # EDA and statistical analysis
+├── 02_classification.ipynb              # ESG classification modeling
+├── 03_regression.ipynb                  # Profit margin prediction
+├── 04_timeseries.ipynb                  # SARIMA forecasting
+│
+├── app.py                               # Streamlit dashboard
+├── requirements.txt                     # Python dependencies
+├── README.md                            # This file
 │
 ├── data/
-│   ├── esg_financial_data.csv       # Raw dataset
-│   └── esg_processed.csv            # Processed dataset with ESG categories
-│
-├── notebooks/
-│   ├── 01_data_exploration.py       # EDA and statistical analysis
-│   ├── 02_classification.py         # ESG classification modeling
-│   ├── 03_regression.py             # Profit margin prediction
-│   └── 04_timeseries.py             # Forecasting models
+│   ├── raw_data.csv                     # Raw dataset
+│   └── esg_processed.csv               # Processed dataset with ESG categories
 │
 ├── models/
-│   ├── best_classification_model.pkl    # Trained classification model
+│   ├── best_classification_model.pkl    # Trained Random Forest classifier
 │   ├── classification_scaler.pkl        # Feature scaler for classification
 │   ├── label_encoder.pkl                # ESG category encoder
-│   ├── best_regression_model.pkl        # Trained regression model
+│   ├── best_regression_model.pkl        # Trained Random Forest regressor
 │   └── regression_scaler.pkl            # Feature scaler for regression
 │
-├── outputs/
-│   ├── *.html                           # Interactive Plotly visualizations
-│   ├── *.png                            # Static plots
-│   └── *.csv                            # Results and forecasts
-│
-├── app.py                              # Streamlit dashboard
-├── requirements.txt                     # Python dependencies
-├── README.md                           # This file
-└── LICENSE                             # MIT License
+└── outputs/
+    ├── forecast_results_2026_2030.csv   # SARIMA forecast results
+    ├── model_comparison_timeseries.csv  # Time series model metrics
+    ├── regression_results.csv           # Regression model comparison
+    ├── classification_results.csv       # Classification model comparison
+    └── *.png / *.html                   # Plots and interactive charts
 ```
 
 ---
@@ -168,13 +153,12 @@ esg-financial-analysis/
 ### Prerequisites
 - Python 3.8 or higher
 - pip package manager
-- Git (optional)
 
 ### Step 1: Clone Repository
 
 ```bash
-git clone https://github.com/yourusername/esg-financial-analysis.git
-cd esg-financial-analysis
+git clone https://github.com/YonathanHH/ESG_and_Financial_Relationship.git
+cd ESG_and_Financial_Relationship
 ```
 
 ### Step 2: Create Virtual Environment (Recommended)
@@ -199,28 +183,26 @@ pip install -r requirements.txt
 
 1. Visit [Kaggle Dataset Page](https://www.kaggle.com/datasets/shriyashjagtap/esg-and-financial-performance-dataset)
 2. Download `esg_financial_data.csv`
-3. Place in `data/` folder
+3. Place in the `data/` folder
 
 ---
 
 ## 💻 Usage
 
-### Run Analysis Notebooks
-
-Execute notebooks in sequence:
+### Run Notebooks in Sequence
 
 ```bash
 # 1. Data Exploration
-python notebooks/01_data_exploration.py
+jupyter notebook 01_EDA.ipynb
 
 # 2. Classification Modeling
-python notebooks/02_classification.py
+jupyter notebook 02_classification.ipynb
 
 # 3. Regression Modeling
-python notebooks/03_regression.py
+jupyter notebook 03_regression.ipynb
 
 # 4. Time Series Forecasting
-python notebooks/04_timeseries.py
+jupyter notebook 04_timeseries.ipynb
 ```
 
 ### Launch Interactive Dashboard
@@ -230,16 +212,6 @@ streamlit run app.py
 ```
 
 The dashboard will open in your browser at `http://localhost:8501`
-
-### Jupyter Notebook Alternative
-
-If you prefer Jupyter notebooks:
-
-```bash
-jupyter notebook
-```
-
-Then convert .py files to .ipynb or run as Python scripts within Jupyter.
 
 ---
 
@@ -252,14 +224,14 @@ Then convert .py files to .ipynb or run as Python scripts within Jupyter.
 - Handle missing values (GrowthRate NaN for 2015 is expected)
 - Create ESG performance categories based on overall scores:
   - Excellent: > 75
-  - Good: 50-75
-  - Average: 25-49
+  - Good: 50–75
+  - Average: 25–49
   - Poor: < 25
 - Analyze distributions, correlations, and temporal trends
 - Statistical hypothesis testing
 
 **Key Findings:**
-- Strong correlation between ESG scores and profit margins (r ≈ 0.45)
+- Moderate positive correlation between ESG scores and profit margins
 - Technology and Finance sectors lead in ESG performance
 - Upward trend in ESG scores from 2015 to 2025
 - Regional variations in sustainability practices
@@ -276,12 +248,7 @@ Then convert .py files to .ipynb or run as Python scripts within Jupyter.
 5. Hyperparameter tuning: GridSearchCV on best model
 6. Evaluation: Accuracy, Precision, Recall, F1-Score, Confusion Matrix
 
-**Models Compared:**
-- Logistic Regression
-- Random Forest ⭐ (typically best)
-- Gradient Boosting
-- Support Vector Machine
-- K-Nearest Neighbors
+**Best Model: Random Forest** (tuned via GridSearchCV)
 
 ### 3. Regression Modeling
 
@@ -293,63 +260,62 @@ Then convert .py files to .ipynb or run as Python scripts within Jupyter.
 3. Feature scaling: StandardScaler
 4. Model training: 8 algorithms compared
 5. Evaluation: RMSE, MAE, R²
-6. Residual analysis and validation
 
-**Models Compared:**
-- Simple Linear Regression
-- Polynomial Regression (degree 2)
-- Ridge Regression
-- Lasso Regression
-- ElasticNet
-- Random Forest
-- Gradient Boosting
-- XGBoost ⭐ (typically best)
+**Best Model: Random Forest Regressor**
 
 ### 4. Time Series Forecasting
 
 **Problem**: Forecast 5-year trends in GrowthRate, Revenue, and ESG_Overall
 
-**Methods:**
-
-**SARIMA (Seasonal ARIMA)**
-- Statistical approach
-- Captures seasonality and trends
-- Parameters: (p,d,q)(P,D,Q,s)
-- Best for stable patterns
-
-**Prophet**
-- Developed by Facebook
-- Robust to missing data and outliers
-- Handles holidays and changepoints
-- Intuitive hyperparameters
-
-**Evaluation:**
-- MAPE (Mean Absolute Percentage Error)
-- RMSE (Root Mean Squared Error)
-- Visual comparison of forecasts
+**Method: SARIMA**
+- Annual data aggregated (mean) across all companies per year
+- Stationarity tested with ADF test
+- ACF/PACF plots used to determine SARIMA orders
+- Trained on 2015–2022, evaluated on 2023–2025, forecast to 2030
+- Evaluated with MAPE and RMSE
 
 ---
 
-## 📈 Results (TBA)
+## 📈 Results
 
 ### Classification Performance
 
+**Best Model: Tuned Random Forest**
+
 **Key Insights:**
 - Carbon emissions is the strongest predictor of ESG category
-- Water usage and energy consumption also significant
+- Water usage and energy consumption are also significant
 - Model successfully distinguishes between performance tiers
 
 ### Regression Performance
 
+**Best Model: Random Forest Regressor**
+
+| Metric | Score |
+|--------|-------|
+| R² Score | 0.1475 |
+| RMSE | 8.2383 |
+| MAE | 6.2218 |
 
 **Key Insights:**
-- ESG_Overall has positive impact on profit margins
-- Higher carbon emissions correlate with lower profitability
-- Model explains 75% of variance in profit margins
+- ESG_Overall shows a positive direction on profit margins
+- Higher carbon emissions tend to correlate with lower profitability
+- Weak R² suggests profit margin is influenced by many factors beyond ESG metrics alone
 
-### Forecasting Results (2026-2030)
+### Forecasting Results (2026–2030)
 
-TBA
+**Model: SARIMA**
+
+| Metric | MAPE |
+|--------|------|
+| GrowthRate | 4.35% |
+| Revenue | 1.00% |
+| ESG_Overall | 0.16% |
+
+**Key Insights:**
+- Revenue and ESG_Overall forecasts are highly accurate (low MAPE)
+- GrowthRate is more volatile but still within acceptable error margins
+- ESG scores show a continued upward trend through 2030
 
 ---
 
@@ -359,26 +325,25 @@ TBA
 
 **Core:**
 - Python 3.8+
-- NumPy, Pandas - Data manipulation
-- Scikit-learn - Machine learning
-- XGBoost - Gradient boosting
+- NumPy, Pandas — Data manipulation
+- Scikit-learn — Machine learning
+- XGBoost — Gradient boosting
 
 **Visualization:**
-- Plotly - Interactive charts
-- Matplotlib, Seaborn - Static plots
+- Plotly — Interactive charts
+- Matplotlib, Seaborn — Static plots
 
 **Time Series:**
-- Statsmodels - SARIMA
-- Prophet - Facebook forecasting
+- Statsmodels — SARIMA
 
 **Web Dashboard:**
-- Streamlit - Interactive web app
-- Joblib - Model serialization
+- Streamlit — Interactive web app
+- Joblib — Model serialization
 
 ### Development Tools
-- Git - Version control
-- Jupyter Notebook - Exploration
-- VS Code - IDE
+- Git & GitHub — Version control
+- Jupyter Notebook — Analysis and exploration
+- VS Code — IDE
 
 ---
 
@@ -398,16 +363,14 @@ TBA
 
 ### Dashboard Features
 - [ ] Real-time data updates
-- [ ] User authentication and saved preferences
 - [ ] Custom report generation (PDF)
-- [ ] A/B testing different models
 - [ ] Geospatial visualization with Folium
 
 ### Deployment
 - [ ] Dockerization
 - [ ] CI/CD pipeline
-- [ ] Cloud deployment (AWS, Azure, GCP)
-- [ ] API endpoints for model serving
+- [ ] Cloud deployment (AWS / Streamlit Cloud)
+- [ ] API endpoints for model serving (FastAPI)
 
 ---
 
@@ -431,13 +394,13 @@ Contributions are welcome! Please follow these steps:
 
 ## 📄 License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the MIT License.
 
 ---
 
 ## 👤 Contact
 
-**Your Name**
+**Yonathan Hary**
 - LinkedIn: [Yonathan Hary](https://www.linkedin.com/in/yonathanhary/)
 - Email: yonathan.hary@outlook.com
 - GitHub: [@YonathanHH](https://github.com/YonathanHH)
@@ -451,11 +414,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 - **Dataset**: [Shriyash Jagtap on Kaggle](https://www.kaggle.com/datasets/shriyashjagtap/esg-and-financial-performance-dataset)
 - **Inspiration**: Growing importance of ESG in investment decisions
-- **Learning Resources**: 
-  - Scikit-learn Documentation
-  - Prophet Documentation
-  - Streamlit Gallery
-  - Kaggle Community
+- **Learning Resources**: Scikit-learn Docs, Statsmodels Docs, Streamlit Gallery, Kaggle Community
 
 ---
 
