@@ -10,7 +10,7 @@
 
 Analyzing the relationship between Environmental, Social, and Governance (ESG) factors and financial performance across 1,000 global companies from 2015-2025.
 
-[Dataset](https://www.kaggle.com/datasets/shriyashjagtap/esg-and-financial-performance-dataset)
+[Dataset](https://www.kaggle.com/datasets/shriyashjagtap/esg-and-financial-performance-dataset) | [Streamlit Dashboard](http://esgfin-relation.streamlit.app/)
 
 </div>
 
