@@ -1,4 +1,5 @@
 # 🌍 ESG & Financial Performance Analysis
+<img width="776" height="595" alt="esg" src="https://github.com/user-attachments/assets/15ab4196-6939-4931-921e-ced2741ea762" />
 
 <div align="center">
 
